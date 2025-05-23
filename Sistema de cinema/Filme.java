@@ -1,9 +1,11 @@
+import java.time.LocalTime;
+
 public class Filme{
     private String titulo;
-    private int duracao;
-    private String classificacao;
+    private LocalTime duracao;
+    private int classificacao;
 
-    public Filme(String titulo, int duracao, String classificacao){
+    public Filme(String titulo, LocalTime duracao, String classificacao){
         this.titulo = titulo;
         this.duracao = duracao;
         this.classificacao = classificacao;
@@ -13,11 +15,29 @@ public class Filme{
         return titulo;
     }
 
-    public int getDuracao(){
+    public LocalTime getDuracao(){
         return duracao;
     }
 
-    public String getClassificacao(){
+    public int getClassificacao(){
         return classificacao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Filme filme = (Filme) o;
+        return titulo.equals(filme.titulo);
+    }
+
+    @Override
+    public int hashCode() {
+        return titulo.hashCode();
+    }
+
+
+    public String toString(){
+        return "Titulo: " + titulo + " Duracao: " + duracao + " Classificacao: " + classificacao;
     }
 }
