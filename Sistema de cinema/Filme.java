@@ -5,7 +5,7 @@ public class Filme{
     private LocalTime duracao;
     private int classificacao;
 
-    public Filme(String titulo, LocalTime duracao, String classificacao){
+    public Filme(String titulo, LocalTime duracao, int classificacao){
         this.titulo = titulo;
         this.duracao = duracao;
         this.classificacao = classificacao;

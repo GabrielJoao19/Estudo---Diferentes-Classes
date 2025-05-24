@@ -2,14 +2,29 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
-public class Main{
-    static Sessao sessoes = new ArrayList();
-    static Filme filmes = new ArrayList();
-    static Sala salas = new ArrayList();
+public class Ui{
+    static ArrayList<Sessao> sessoes = new ArrayList<>();
+    static ArrayList<Filme> filmes = new ArrayList<>();
+    static ArrayList<Sala> salas = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
     static DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
     public static void main(String[] args) {
-    
+        while (true) {
+            menu();
+            int numero = sc.nextInt();
+            switch(numero){
+                case 1: criarSala();break;
+                case 2: listarSalas();break;
+                case 3: criarSessao();break;
+                case 4: listarSessoes();break;
+                case 5: adicionarFilme();break;
+                case 6: listarFilmes();break;
+                case 7: reservarAssento();break;
+                case 8: fim();return;
+                default: System.out.println("Opcao invalida.");break;
+            }
+
+        }
     }
 
     public static void menu(){
@@ -96,17 +111,21 @@ public class Main{
 
     /*Funcao 5 */
     public static void adicionarFilme(){
+        sc.nextLine();
         System.out.print("Informe o nome do filme: ");
         String titulo = sc.nextLine();
         System.out.print("Informe a duracao do filme: ");
         String duracao = sc.nextLine();
         System.out.print("Informe a classificacao: ");
         int classificacao = sc.nextInt();
+        sc.nextLine();
 
         LocalTime duracaoFormatada = LocalTime.parse(duracao,formatoHora);
 
         Filme filme = new Filme(titulo,duracaoFormatada,classificacao);
         filmes.add(filme);
+
+        System.out.println("O filme " + titulo +  " foi adicionado.");
     }
 
     /*Funcao 6 */
@@ -117,6 +136,7 @@ public class Main{
         }
     }
 
+    /*Funcao 7 */
     public static void reservarAssento(){
         Filme filme = null;
         Sala sala = null;
@@ -158,17 +178,31 @@ public class Main{
 
         Sessao novaSessao = new Sessao(filme,sala,horaFormatada);
 
+        boolean encontrada = false;
 
         for (int i =0;i<sessoes.size();i++){
             Sessao sessaoAtual = sessoes.get(i);
             if (sessaoAtual.equals(novaSessao)){
+                encontrada = true;
                 if (sessaoAtual.getIngressos() > 0){
-                    
+                    sessaoAtual.setIngresso(sessaoAtual.getIngressos() - 1);
                 }
+                else{
+                    System.out.println("Nao tem ingressos disponiveis.");
+                }
+                return;
             }
+           
+        }
+
+        if(!encontrada){
+            System.out.println("Sessao nao foi encontrada.");
+            return;
         }
         
     }
 
-
+    public static void fim(){
+        System.out.println("Saindo...");
+    }
 }

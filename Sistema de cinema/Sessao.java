@@ -1,5 +1,5 @@
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 public class Sessao{
     private Filme filme;
     private Sala sala;
@@ -10,7 +10,7 @@ public class Sessao{
         this.filme = filme;
         this.sala = sala;
         this.horario = horario;
-        ingressos = sala.getCapacidade;
+        this.ingressos = sala.getCapacidade();
     }
 
     public Filme getFilme(){
@@ -28,6 +28,10 @@ public class Sessao{
     public int getIngressos(){
         return ingressos;
     } 
+
+    public void setIngresso(int n){
+        this.ingressos = n;
+    }
 
     @Override
     public boolean equals(Object o) {
