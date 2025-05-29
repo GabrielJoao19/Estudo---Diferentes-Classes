@@ -2,6 +2,8 @@ public class Racional{
     //DEIXA OS ATRIBUTOS IMUTAVEIS
     private final int num,den;
     //ADICIONAR NO CONSTRUTOR METODO DE MDC
+    //ADICNIONAR METODO DE MENOR QUE
+    //ADICIONAR METODO DE TRANSFORMAR EM DOUBLE
     //PODEM TER VARIOS CONSTRUTORES
     public Racional(int num, int den){
         this.num = num;
@@ -34,5 +36,20 @@ public class Racional{
 
     public Racional vezes(int outro){
         return vezes(new Racional(num));
+    }
+    
+    public Racional divisao(Racional outro){
+        int num = this.num * outro.den;
+        int den = this.den * outro.num;
+        return new Racional(num,den);
+    }
+
+    public double toDouble(){
+        return (double) this.num / this.den;
+    }
+
+    public boolean equals(Racional outro){
+        return this.num == outro.num && 
+               this.den == outro.den;
     }
 }
