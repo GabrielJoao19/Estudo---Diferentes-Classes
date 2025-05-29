@@ -35,6 +35,8 @@ public class Racional{
     }
 
     public Racional vezes(int outro){
+        if (outro == 1)
+            return this; //RETORNA ELE mesmo
         return vezes(new Racional(num));
     }
     
