@@ -4,4 +4,5 @@ public class UI {
         Racional num2 = new Racional(3);
 
         System.out.println(num1.vezes(num2));
+    }
 }
